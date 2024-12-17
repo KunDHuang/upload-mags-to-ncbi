@@ -11,7 +11,7 @@ Note: The whole tutorial is mainly for users on HZI slurm HPC infrastructure. Fo
 
 ## Preparation
 
-1. **Organize MAGs locally** 
+1. **Organize MAGs locally** <br> 
    Move the target MAGs to a specified folder. For example, we put 22 HQ MAGs in the folder:
    `/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/raw_mags`
 

@@ -14,8 +14,7 @@ help_page () {
     echo "Usage: fcs_launcher.sh [module]"
     echo ""
     echo " Modules:"
-    echo " screen_adaptor          Screen the genome for adaptors"
-    echo " clean_adaptor           Clean adaptors detected in the genome"
+    echo " screen_adaptor          Screen the genome for adaptors and perform cleaning"
     echo " screen_contamination    Screen the genome for contamination"
     echo " clean_contamination     Clean contaminations detected in the genome"
     echo ""
@@ -29,9 +28,6 @@ help_page () {
 if [ "$1" = screen_adaptor ]; then
     echo fcs_launcher.sh screen_adaptor ${@:2}
     ${FCS_SCRIPTS_DIR}/screen_adaptor.sh ${@:2}
-elif [ "$1" = clean_adaptor ]; then
-    echo fcs_launcher.sh clean_adaptor ${@:2}
-    # ${FCS_SCRIPTS_DIR}/fcs_launcher.sh ${@:2}
 elif [ "$1" = screen_contamination ]; then
     echo fcs_launcher.sh screen_contamination ${@:2}
     # ${FCS_SCRIPTS_DIR}/fcs_launcher.sh ${@:2}

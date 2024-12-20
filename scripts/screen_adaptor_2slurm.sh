@@ -22,7 +22,6 @@ fi
 export TINI_SUBREAPER=1
 FCS_EXE="/vol/projects/khuang/tools/fcs/run_fcsadaptor.sh"
 FCS_SIF="/vol/projects/khuang/tools/fcs/fcs-adaptor.sif"
-
 MAGS_ARRAY=($(find ${MAG_DIR} -type f))
 
 
@@ -35,5 +34,13 @@ echo ${FCS_EXE} --fasta-input ${MAG_FILE} --output-dir ${MAG_SCREEN_OPT_DIR} --p
 
 ${FCS_EXE} --fasta-input ${MAG_FILE} --output-dir ${MAG_SCREEN_OPT_DIR} --prok --container-engine singularity --image ${FCS_SIF}
 
+sleep 3
 
+FCS_PY="/vol/projects/khuang/tools/fcs/fcs.py"
+export FCS_DEFAULT_IMAGE=/vol/projects/khuang/tools/fcs/fcs-gx.sif
+FCS_ADAPTOR_REPORT=${MAG_SCREEN_OPT_DIR}/fcs_adaptor_report.txt
+PYTHON_EXE="/usr/bin/python"
+CLEAN_MAG=${MAG_SCREEN_OPT_DIR}/adaptor_clean_genome.fasta
+APT_CONTAM=${MAG_SCREEN_OPT_DIR}/adaptor_contam.fasta
+zcat ${MAG_FILE} | ${PYTHON_EXE} ${FCS_PY} clean genome --action-report ${FCS_ADAPTOR_REPORT} --output ${CLEAN_MAG} --contam-fasta-out ${APT_CONTAM}  
 

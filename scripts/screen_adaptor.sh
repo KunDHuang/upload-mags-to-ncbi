@@ -49,8 +49,10 @@ mkdir -p ${log_dir}
 
 SLURM_FCS_RUNADAPTOR=$(dirname "$0")/screen_adaptor_2slurm.sh
 SLURM_ARRAY_LENGTH=$(ls "$mags_dir" | wc -l)
-
-
-sbatch --array=1-${SLURM_ARRAY_LENGTH} \
+SLURM_STDOUT="$log_dir"/%x_%j_%a.out
+SLURM_STDERR="$log_dir"/%x_%j_%a.err
+SLURM_JOBNAME="screen_adaptor"
+sbatch --array=1-${SLURM_ARRAY_LENGTH} --job-name=${SLURM_JOBNAME} \
        --cpus-per-task=${cpu} --mem=${mem}g --time=${time}:00:00 \
+       --error=${SLURM_STDERR} --output=${SLURM_STDOUT} \
        ${SLURM_FCS_RUNADAPTOR} ${mags_dir} ${opt_dir} ${log_dir}

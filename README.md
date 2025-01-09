@@ -47,9 +47,9 @@ Note: The whole tutorial is mainly for users on HZI slurm HPC infrastructure. Fo
                    -mem 12 -cpu 4 \
                    -log_dir /vol/projects/khuang/repo_demo/upload-mags-to-ncbi/logs2
    ```
-   <div style="margin-bottom: 15px;"></div>
+   
    As results, in the output directory you will find each input raw MAG corresponds to one sub-directory with suffix `adtr_screen_opt`. And the MAG with adaptors being screened and cleaned is saved in `adaptor_clean_genome.fasta`. The clean genome file will be further used in the step of screening and cleaning foreign contamination. 
-   <div style="margin-bottom: 15px;"></div>
+
    Let's have a look at what outputs you shall expect from `fcs_launcher.sh screen_adaptor` module:
    <div style="margin-top: 15px;"></div>
 

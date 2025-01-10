@@ -56,7 +56,12 @@ Note: The whole tutorial is mainly for users on HZI slurm HPC infrastructure. Fo
    ![screen_adaptor_output](./images/screen_adaptor_outputs.png)
    <div style="margin-bottom: 15px;"></div>
 
+   Now we can create a new folder `adaptor_cleaned_mags`, and move and rename (using the names of raw MAGs) the adaptor-cleaned MAGs:
 
+   <div style="margin-top: 15px;"></div>
+
+   ![renamed_adaptor_cleaned_mags](./images/renamed_adaptor_cleaned_mags.png)
+   <div style="margin-bottom: 15px;"></div>  
 
 3. Assign NCBI taxonomy to each MAG
 

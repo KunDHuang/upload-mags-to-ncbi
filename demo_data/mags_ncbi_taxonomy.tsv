@@ -1,0 +1,23 @@
+mag_id	mag_path	ncbi_taxonomy	ncbi_taxonomy_id
+NI_24-bin.11	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_24-bin.11.fna.gz	Bifidobacterium adolescentis	1680
+NI_24-bin.17	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_24-bin.17.fna.gz	Fusicatenibacter saccharivorans	1150298
+NI_24-bin.33	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_24-bin.33.fna.gz	Agathobacter rectalis	39491
+NI_27-bin.10	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_27-bin.10.fna.gz	Ruminococcus bromii	40518
+NI_27-bin.15	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_27-bin.15.fna.gz	Agathobacter rectalis	39491
+NI_27-bin.18	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_27-bin.18.fna.gz	Subdoligranulum sp. APC924/74	2086273
+NI_27-bin.8	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_27-bin.8.fna.gz	Fusicatenibacter saccharivorans	1150298
+NI_35-bin.10	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_35-bin.10.fna.gz	Alistipes putredinis	28117
+NI_35-bin.12	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_35-bin.12.fna.gz	Ruminococcus	1263
+NI_35-bin.25	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_35-bin.25.fna.gz	Eubacteriaceae	186806
+NI_35-bin.6	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_35-bin.6.fna.gz	Agathobacter rectalis	39491
+NI_78-bin.19	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_78-bin.19.fna.gz	Bifidobacterium adolescentis	1680
+NI_78-bin.21	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_78-bin.21.fna.gz	Fusicatenibacter saccharivorans	1150298
+NI_78-bin.29	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_78-bin.29.fna.gz	Subdoligranulum sp. APC924/74	2086273
+NI_78-bin.33	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_78-bin.33.fna.gz	Alistipes putredinis	28117
+NI_78-bin.37	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_78-bin.37.fna.gz	Phocaeicola vulgatus	821
+NI_78-bin.5	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_78-bin.5.fna.gz	Parabacteroides distasonis	823
+NI_81-bin.15	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_81-bin.15.fna.gz	Anaerostipes hadrus	649756
+NI_81-bin.16	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_81-bin.16.fna.gz	Agathobacter rectalis	39491
+NI_81-bin.18	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_81-bin.18.fna.gz	Parabacteroides distasonis	823
+NI_81-bin.19	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_81-bin.19.fna.gz	Bacteroides uniformis	820
+NI_81-bin.32	/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/adaptor_cleaned_mags/NI_81-bin.32.fna.gz	Eubacteriaceae	186806

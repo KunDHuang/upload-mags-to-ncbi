@@ -63,10 +63,35 @@ Note: The whole tutorial is mainly for users on HZI slurm HPC infrastructure. Fo
    ![renamed_adaptor_cleaned_mags](./images/renamed_adaptor_cleaned_mags.png)
    <div style="margin-bottom: 15px;"></div>  
 
-3. Assign NCBI taxonomy to each MAG
-
 3. NCBI foreign contamination screening with FCS tool
+   Our wrap-up script `fcs_launcher.sh` also provides a module to screen and clean foreign contamination, `fcs_launcher.sh screen_contamination`:
 
+   ```bash
+   Usage: fcs_launcher.sh screen_contamination -mags_ncbi_tax [mags_ncbi_taxonomy_file.tsv] -opt_dir [output_folder_abspath]
+   Options:
+   -mags_ncbi_tax    STR        Specify the absolute path of the file containing MAG ID, MAG location, NCBI taxonomy, and NCBI taxonomy ID.
+   -opt_dir          STR        Specify the absolute path of the folder to hold outputs.
+   -mem              INT        Specify the memory in need (default = 512, Gb)
+   -cpu              INT        Specify the number CPUs to use for processing one sample (default = 20)
+   -log_dir          STR        Specify the directory to hold logs (default = /vol/cluster-data/khuang/slurm_logs)
+   -time             INT        Specify the walltime (default = 12, hours)
+
+   --help | -h             Show this help page
+
+   !NOTE!: All inputs (including files and directories) should be given with an absolute path!
+   ```
+
+   To execute this module, the lowest [NCBI taxonomy ID](https://www.ncbi.nlm.nih.gov/taxonomy) should be assigned to each target MAG. For example, we organized NCBI taxonomy ID for each of our demo MAG as [mags_ncbi_taxonomy.tsv](./demo_data/mags_ncbi_taxonomy.tsv). Note: the input MAGs in this step should come from the output of the previous step `screen_adaptor` which is saved in the folder `adaptor_cleaned_mags`.
+
+
+   The running command:
+
+   ```bash
+   fcs_launcher.sh screen_contamination \
+                   -mags_ncbi_tax /vol/projects/khuang/repo_demo/upload-mags-to-ncbi/mags_ncbi_taxonomy.tsv \
+                   -opt_dir /vol/projects/khuang/repo_demo/upload-mags-to-ncbi/contamination_cleaned_mags \
+                   -log_dir /vol/projects/khuang/repo_demo/upload-mags-to-ncbi/logs2
+   ```
 
 
 ## Submission

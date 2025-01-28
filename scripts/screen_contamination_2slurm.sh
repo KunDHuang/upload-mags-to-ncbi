@@ -35,5 +35,5 @@ do
    sleep 3
    FCS_GX_RPT=${SUB_OPT_DIR}/*fcs_gx_report.txt
    sed -i "s/FIX/SPLIT/g" ${FCS_GX_RPT}
-   zcat ${INPUT_GENOME} | ${PYTHON_EXE} ${FCS_EXE} clean genome --action-report ${FCS_GX_RPT} --output ${SUB_OPT_DIR}/contam_cleane_genome.fasta --contam-fasta-out ${SUB_OPT_DIR}/contam.fasta
+   zcat ${INPUT_GENOME} | ${PYTHON_EXE} ${FCS_EXE} clean genome --action-report ${FCS_GX_RPT} --output ${SUB_OPT_DIR}/contam_clean_genome.fasta --contam-fasta-out ${SUB_OPT_DIR}/contam.fasta
 done < <(tail -n +2 ${MAGS_NCBI_TAX})

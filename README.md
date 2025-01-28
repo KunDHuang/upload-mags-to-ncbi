@@ -1,98 +1,135 @@
-# upload-mags-to-ncbi
-This repo is a demonstration for depositing MAGs (metagenome-assembled genomes) in NCBI.
-Note: The whole tutorial is mainly for users on HZI slurm HPC infrastructure. For other users, certain degree of customization is needed.
+# Upload MAGs to NCBI
 
+This repository provides a demonstration for depositing metagenome-assembled genomes (MAGs) into NCBI.  
+**Note:** This tutorial primarily targets users on the HZI Slurm HPC infrastructure. For other environments, customization may be required.
+
+---
 ## Table of Contents
 
-1. [Submission preparation](#Preparation)
-2. [MAG submission through NCBI portal](#Submission)
+1. [Submission Preparation](#submission-preparation)
+2. [MAG Submission through NCBI Portal](#mag-submission-through-ncbi-portal)
+
+---
+
+## Submission Preparation
+
+### 1. Organize MAGs Locally  
+Move the target MAGs into a specified folder. For example, we placed 22 high-quality (HQ) MAGs in the following directory:  
+`/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/raw_mags`  
 
 
+Directory structure example:  
+<div style="margin-top: 15px;"></div>
 
-## Preparation
+![raw_mags_layout](./images/raw_mags_layout.png)
 
-1. **Organize MAGs locally** <br> 
-   Move the target MAGs to a specified folder. For example, we put 22 HQ MAGs in the folder:
-   `/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/raw_mags`
+<div style="margin-bottom: 15px;"></div>
 
-   <div style="margin-top: 15px;"></div>
+---
 
-   ![raw_mags_layout](./images/raw_mags_layout.png)
-   <div style="margin-bottom: 15px;"></div>
-   
-2. Screen adaptor with FCS tool
-   We implemented FCS [(Foreign Contamination Screening) pipeline](https://github.com/ncbi/fcs) in our wrap-up script `fcs_launcher.sh` to ensure MAG quality for NCBI submission. In this step, we are using `screen_adaptor` module of `fcs_launcher.sh`:
-   ```bash
-   Usage: fcs_launcher.sh screen_adaptor -mags_dir [mags_folder_abspath] -opt_dir [output_folder_abspath]
-   Options:
+### 2. Screen Adapters with the FCS Tool  
 
-   -mags_dir    STR        Specify the absolute path of the folder containing target MAGs.
-   -opt_dir     STR        Specify the absolute path of the folder to hold outputs.
-   -mem         INT        Specify the memory in need (default = 12, Gb)
-   -cpu         INT        Specify the number CPUs to use for processing one sample (default = 5)
-   -log_dir     STR        Specify the directory to hold logs (default = /vol/cluster-data/khuang/slurm_logs)
-   -time        INT        Specify the walltime (default = 24, hours)
+We use the **FCS (Foreign Contamination Screening) pipeline** [GitHub link](https://github.com/ncbi/fcs) via our wrapper script `fcs_launcher.sh` to ensure MAG quality. This step uses the `screen_adaptor` module of the script.  
 
-   --help | -h             Show this help page
+**Usage**:  
 
-   !NOTE!: All inputs (including files and directories) should be given with an absolute path!
-   ```
+```bash
+fcs_launcher.sh screen_adaptor -mags_dir [mags_folder_abspath] -opt_dir [output_folder_abspath]
+Options:
+-mags_dir    STR  Absolute path to the folder containing MAGs.
+-opt_dir     STR  Absolute path to the output folder.
+-mem         INT  Memory allocation (default: 12 GB).
+-cpu         INT  CPUs per sample (default: 5).
+-log_dir     STR  Path for logs (default: /vol/cluster-data/khuang/slurm_logs).
+-time        INT  Walltime in hours (default: 24).
 
-   The running command:
+--help | -h       Display this help page.
 
-   ```bash
-   fcs_launcher.sh screen_adaptor \
+**Note:** All paths must be absolute!
+```   
+
+
+Example Command:
+
+```bash
+fcs_launcher.sh screen_adaptor \
                    -mags_dir /vol/projects/khuang/repo_demo/upload-mags-to-ncbi/raw_mags \
                    -opt_dir /vol/projects/khuang/repo_demo/upload-mags-to-ncbi/screen_adaptor_opt \
                    -mem 12 -cpu 4 \
                    -log_dir /vol/projects/khuang/repo_demo/upload-mags-to-ncbi/logs2
-   ```
-   
-   As results, in the output directory you will find each input raw MAG corresponds to one sub-directory with suffix `adtr_screen_opt`. And the MAG with adaptors being screened and cleaned is saved in `adaptor_clean_genome.fasta`. The clean genome file will be further used in the step of screening and cleaning foreign contamination. 
+```
 
-   Let's have a look at what outputs you shall expect from `fcs_launcher.sh screen_adaptor` module:
-   <div style="margin-top: 15px;"></div>
+Output: Each raw MAG will generate a corresponding sub-directory with the suffix `_adtr_screen_opt`. The cleaned genome file is saved as `adaptor_clean_genome.fasta` and will be used in subsequent steps.
 
-   ![screen_adaptor_output](./images/screen_adaptor_outputs.png)
-   <div style="margin-bottom: 15px;"></div>
+Directory structure example:
 
-   Now we can create a new folder `adaptor_cleaned_mags`, and move and rename (using the names of raw MAGs) the adaptor-cleaned MAGs:
+<div style="margin-top: 15px;"></div>
 
-   <div style="margin-top: 15px;"></div>
+![screen_adaptor_output](./images/screen_adaptor_outputs.png)
 
-   ![renamed_adaptor_cleaned_mags](./images/renamed_adaptor_cleaned_mags.png)
-   <div style="margin-bottom: 15px;"></div>  
+<div style="margin-bottom: 15px;"></div>
 
-3. NCBI foreign contamination screening with FCS tool
-   Our wrap-up script `fcs_launcher.sh` also provides a module to screen and clean foreign contamination, `fcs_launcher.sh screen_contamination`:
+Organize Outputs:
+1. Create a folder named `adaptor_cleaned_mags`.
+2. Move and rename cleaned MAGs using the original raw MAG names.
+Example:
 
-   ```bash
-   Usage: fcs_launcher.sh screen_contamination -mags_ncbi_tax [mags_ncbi_taxonomy_file.tsv] -opt_dir [output_folder_abspath]
-   Options:
-   -mags_ncbi_tax    STR        Specify the absolute path of the file containing MAG ID, MAG location, NCBI taxonomy, and NCBI taxonomy ID.
-   -opt_dir          STR        Specify the absolute path of the folder to hold outputs.
-   -mem              INT        Specify the memory in need (default = 512, Gb)
-   -cpu              INT        Specify the number CPUs to use for processing one sample (default = 20)
-   -log_dir          STR        Specify the directory to hold logs (default = /vol/cluster-data/khuang/slurm_logs)
-   -time             INT        Specify the walltime (default = 12, hours)
+<div style="margin-top: 15px;"></div>
 
-   --help | -h             Show this help page
+![renamed_adaptor_cleaned_mags](./images/renamed_adaptor_cleaned_mags.png)
+<div style="margin-bottom: 15px;"></div>  
 
-   !NOTE!: All inputs (including files and directories) should be given with an absolute path!
-   ```
+### 3. Screen Foreign Contaminats with FCS Tool <br>
+The `fcs_launcher.sh` script also includes the `screen_contamination` module to screen and clean foreign contaminants from MAGs.
 
-   To execute this module, the lowest [NCBI taxonomy ID](https://www.ncbi.nlm.nih.gov/taxonomy) should be assigned to each target MAG. For example, we organized NCBI taxonomy ID for each of our demo MAG as [mags_ncbi_taxonomy.tsv](./demo_data/mags_ncbi_taxonomy.tsv). Note: the input MAGs in this step should come from the output of the previous step `screen_adaptor` which is saved in the folder `adaptor_cleaned_mags`.
+**Usage**:
+
+```bash
+fcs_launcher.sh screen_contamination -mags_ncbi_tax [mags_ncbi_taxonomy_file.tsv] -opt_dir [output_folder_abspath]
+Options:
+-mags_ncbi_tax    STR  Path to a TSV file containing MAG ID, location, NCBI taxonomy, and taxonomy ID.
+-opt_dir          STR  Path to the output folder.
+-mem              INT  Memory allocation (default: 512 GB).
+-cpu              INT  CPUs per sample (default: 20).
+-log_dir          STR  Path for logs (default: /vol/cluster-data/khuang/slurm_logs).
+-time             INT  Walltime in hours (default: 12).
+
+--help | -h       Display this help page.
+
+**Note:** All paths must be absolute!
+```
+
+**Prepare NCBI Taxonomy Data**:
+
+Assign [NCBI taxonomy ID](https://www.ncbi.nlm.nih.gov/taxonomy) to each MAG. Example input file:
+[mags_ncbi_taxonomy.tsv](./demo_data/mags_ncbi_taxonomy.tsv)
+
+**Important**: Use MAGs from the output of the `screen_adaptor` step, located in `adaptor_cleaned_mags`.
+
+Example Command:
 
 
-   The running command:
 
-   ```bash
-   fcs_launcher.sh screen_contamination \
+```bash
+fcs_launcher.sh screen_contamination \
                    -mags_ncbi_tax /vol/projects/khuang/repo_demo/upload-mags-to-ncbi/mags_ncbi_taxonomy.tsv \
                    -opt_dir /vol/projects/khuang/repo_demo/upload-mags-to-ncbi/contamination_cleaned_mags \
                    -log_dir /vol/projects/khuang/repo_demo/upload-mags-to-ncbi/logs2
-   ```
+```
+
+Output: Each MAG generates a corresponding sub-directory with the suffix `_contam_screen_opt`. The cleaned genome file is saved as `contam_clean_genome.fasta` and is now ready for NCBI submission.
+
+Directory structure example:
+
+<div style="margin-top: 15px;"></div>
+
+![screen_contam_outputs](./images/screen_contam_outputs.png)
+<div style="margin-bottom: 15px;"></div> 
 
 
-## Submission
+**Note**: Ensure filenames are modified to match unique MAG IDs before submission.     
+
+
+
+## MAG Submission through NCBI Portal
 

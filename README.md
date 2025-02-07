@@ -127,9 +127,31 @@ Directory structure example:
 <div style="margin-bottom: 15px;"></div> 
 
 
-**Note**: Ensure filenames are modified to match unique MAG IDs before submission.     
+**Note**: Ensure filenames are modified to match unique MAG IDs before submission.
 
-
+We can organize all cleaned MAGs in one folder and rename them using original raw MAG names (for example, `/vol/projects/khuang/repo_demo/upload-mags-to-ncbi/final_mags`). Now we can start submission procedure.  
 
 ## MAG Submission through NCBI Portal
+
+To submit MAGs to NCBI, first we need to log into [NCBI submission portal](https://submit.ncbi.nlm.nih.gov/). Afterwards, click __My submission__ (please visit our tutorial for [uploading metagenomes to NCBI](https://github.com/KunDHuang/upload-metagenomes-to-ncbi) to refresh basics), and in __Your submissions__ please choose __Genome__:
+
+<div style="margin-top: 15px;"></div>
+
+![click_genome](./images/click_genome.png)
+<div style="margin-bottom: 15px;"></div> 
+
+We first need to upload our MAGs to NCBI using FTP client - click __Upload via Aspera command line or FTP__:
+
+<div style="margin-top: 15px;"></div>
+
+![click_FTP](./images/click_FTP.png)
+<div style="margin-bottom: 15px;"></div> 
+
+
+Next, please click __FTP instructions__ and read six steps below carefully:
+
+<div style="margin-top: 15px;"></div>
+
+![click_FTP](./images/six_steps.png)
+<div style="margin-bottom: 15px;"></div> 
 
